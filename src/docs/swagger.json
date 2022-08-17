@@ -1,0 +1,213 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API X-Men",
+    "description": "A API from X-Men",
+    "termsOfService": "",
+    "contact": {
+      "email": "mateus_santiago2.3@outlook.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/xmen",
+      "description": "DEV"
+    },
+    {
+      "url": "",
+      "description": "PROD"
+    }
+  ],
+  "paths": {
+    "/todos-xmen": {
+      "get": {
+        "summary": "this endpoint return all xmen in database",
+        "tags": ["xmen"],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/xmen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "summary": "this endpoint return a unique xmen finded by id",
+        "tags": ["xmen"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id the xmen to be finded",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/xmen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create": {
+      "post": {
+        "summary": "this endpoint the xmen has been created",
+        "tags": ["xmen"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/xmen"
+              },
+              "examples": {
+                "xmen": {
+                  "value": {
+                    "character": "Wolverine",
+                    "skills": "Além de suas mortais garras de adamantium capazes de cortar qualquer coisa, ele tem um poderoso fato de cura; envelhece lentamente – o que o torna praticamente imortal -; e tem diversas características animais, como sentidos muito aguçados.",
+                    "age": 135,
+                    "gender": "Masculino",
+                    "origin": "O que se sabe com certeza é que o homem que durante muitos anos foi chamado simplesmente de Logan nasceu James Howlett, no Canadá, na segunda metade do século XIX. Depois de uma tragédia familiar, James assumiu o nome Logan e passou o resto de sua adolescência nas florestas daquele país."
+                  }
+                }
+              },
+              "responses": {
+                "400": {
+                  "description": "Bad request"
+                },
+                "200": {
+                  "description": "Xmen Created",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/xmen"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update": {
+      "put": {
+        "summary": "this endpoint return the xmen updated",
+        "tags": ["xmen"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/xmen"
+              },
+              "examples": {
+                "xmen": {
+                  "value": {
+                    "id": "1",
+                    "character": "Wolverine",
+                    "skills": "Além de suas mortais garras de adamantium capazes de cortar qualquer coisa, ele tem um poderoso fato de cura; envelhece lentamente – o que o torna praticamente imortal -; e tem diversas características animais, como sentidos muito aguçados.",
+                    "age": 135,
+                    "gender": "Masculino",
+                    "origin": "O que se sabe com certeza é que o homem que durante muitos anos foi chamado simplesmente de Logan nasceu James Howlett, no Canadá, na segunda metade do século XIX. Depois de uma tragédia familiar, James assumiu o nome Logan e passou o resto de sua adolescência nas florestas daquele país."
+                  }
+                }
+              },
+              "responses": {
+                "400": {
+                  "description": "Bad request"
+                },
+                "200": {
+                  "description": "Xmen Updated",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/xmen"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete/{id}": {
+      "delete": {
+        "summary": "this endpoint return a deleted xmen finded by id",
+        "tags": ["xmen"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id the xmen deleted",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/xmen"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "xmen": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "character": { "type": "string" },
+          "skills": { "type": "string" },
+          "age": { "type": "number" },
+          "gender": { "type": "string" },
+          "origin": { "type": "string" }
+        },
+        "createdAt": { "type": "string" }
+      }
+    }
+  }
+}
