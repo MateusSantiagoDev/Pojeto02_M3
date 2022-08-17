@@ -46,7 +46,7 @@ const updateController = async (req, res) => {
     !xmenEdt.gender ||
     !xmenEdt.origin
   ) {
-    return res.status(400).send({ message: `informe todos os dados do X-Men` });
+    return res.status(400).send({ message: `informe todos os dado do X-Men` });
   }
 
   const updateXmen = await serviceXmen.updateService(id, xmenEdt);
